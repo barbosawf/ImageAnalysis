@@ -9,20 +9,21 @@ library("tidyverse")
 # Importação da imagem para testes de segmentação. Deve-se escolher uma
 # imagem na pasta "ImagesProj e substituir o nome "figure_name.jpg"
 # na função image_import()
-img <- image_import("figure_name.jpg", path = "ImagesProj")
+img <- image_import("figure_name.jpg", path = "ImagesProj", plot = T)
+
 
 # Segmentação com todos os IVs e falso para inversão (invert = F).
 # Buscar IVs que segmentam tanto os objetos em estudo quanto a referência.
 # O plano de fundo ficará branco. Os objetos em estudo e a referência
 # ficarão em destaque.
-image_segment(img, index = 'all', show_image = T, invert = F)
+image_segment(img, index = 'all', plot = T, parallel = T, invert = F)
 
 
 # Segmentação com todos os IVs e verdadeiro para inversão (invert = T).
 # Buscar IVs que segmentam tanto os objetos em estudo quanto a referência.
 # O plano de fundo ficará branco. Os objetos em estudo e a referência
 # ficarão em destaque.
-image_segment(img, index = 'all', show_image = T, invert = T)
+image_segment(img, index = 'all', plot = T, parallel = T, invert = T )
 
 
 # IVs para segmentação dos objetos em estudo e da referência
@@ -36,7 +37,7 @@ map(IVs_obj_ref_inv_false,
     ~ image_segment(
       img,
       index = .x,
-      show_image = T,
+      plot = T,
       filter = 4,
       invert = F
     ))
@@ -53,7 +54,7 @@ map(IVs_obj_ref_inv_true,
     ~ image_segment(
       img,
       index = .x,
-      show_image = T,
+      plot = T,
       filter = 4,
       invert = T
     ))
@@ -68,7 +69,7 @@ seg_obj_ref <-
   image_segment(
     img,
     index = "SCI",
-    show_image = T,
+    plot = T,
     filter = 4,
     invert = F
   )
@@ -82,7 +83,7 @@ seg_only_ref_inv_false <- map(
   try(image_binary(
     seg_obj_ref,
     index = x,
-    show_image = T,
+    plot = T,
     filter = 4,
     parallel = T,
     invert = F
@@ -100,7 +101,7 @@ seg_only_ref_inv_true <- map(
   try(image_binary(
     seg_obj_ref,
     index = x,
-    show_image = T,
+    plot = T,
     filter = 4,
     parallel = T,
     invert = T
