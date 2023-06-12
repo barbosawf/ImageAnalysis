@@ -127,7 +127,7 @@ for (i in seq_len(length(split_file_list))) {
       # Índice para remover o fundo e os objetos em estudo.
       # Neste trabalho, ele foi encontrado com invert = TRUE.
       fore_ref_index = "HUE2",
-      # watersehed = FALSE é melhor quando as imagens os objetos na
+      # watershed = FALSE é melhor quando os objetos na
       # imagem não estão muito próximos. Caso estejam muito próximos,
       # ou ligeiramente sobrepostos, mudar para TRUE.
       watershed = TRUE,
